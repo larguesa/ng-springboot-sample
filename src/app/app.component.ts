@@ -18,7 +18,7 @@ export class AppComponent  {
   name = 'Spring Boot sample';
 
   login = "ricardo.larguesa@fatec.sp.gov.br";
-  password = "123456";
+  password = "";
 
   auth = null;
 
