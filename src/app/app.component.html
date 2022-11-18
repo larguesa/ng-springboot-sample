@@ -1,20 +1,30 @@
 <hello name="{{ name }}"></hello>
-<hr/>
+<hr />
+<div *ngIf="error" style="color: red">
+  <hr/>
+  <div *ngIf="error.message">{{ error.message}}</div>
+  <div *ngIf="!error.message">{{ error | json}}</div>
+  <hr/>
+</div>
 <div *ngIf="!auth">
   <div>Usuário</div>
-  <div><input type="text" [(ngModel)]="login"/></div>
+  <div><input type="text" [(ngModel)]="login" /></div>
   <div>Senha</div>
-  <div><input type="password" [(ngModel)]="password"/></div>
-  <hr/>
-  <div><input type="button" value="Entrar" (click)="postLogin()"/></div>
+  <div><input type="password" [(ngModel)]="password" /></div>
+  <hr />
+  <div *ngIf="loading">Processando...</div>
+  <div *ngIf="!loading">
+    <input type="button" value="Entrar" (click)="postLogin()" />
+  </div>
 </div>
 <div *ngIf="auth">
   <div>
-    Bem vindo, {{auth.username}}
-    <input type="button" value="Sair" (click)="postLogout()"/>
+    Bem vindo, {{ auth.username }}
+    <input type="button" value="Sair" (click)="postLogout()" />
   </div>
-  <hr/>
-  <button (click)="getList()">Atualizar pessoas físicas</button>
+  <hr />
+  <div *ngIf="loading">Processando...</div>
+  <button *ngIf="!loading" (click)="getList()">Atualizar pessoas físicas</button>
   <div *ngIf="list">
     <table>
       <tr>
@@ -23,9 +33,9 @@
         <th>endereço</th>
       </tr>
       <tr *ngFor="let item of list">
-        <td>{{item["id"]}}</td>
-        <td>{{item["nome"]}}</td>
-        <td>{{item["endereco"]}}</td>
+        <td>{{ item['id'] }}</td>
+        <td>{{ item['nome'] }}</td>
+        <td>{{ item['endereco'] }}</td>
       </tr>
     </table>
   </div>
